@@ -59,5 +59,6 @@
     ],
     "authenticationType": "AUTH_TYPE_NONE",
     "implementationType": "javascript",
-    "dynamicContextEndpoints": []
+    "dynamicContextEndpoints": [],
+    "permissions": ["read_last_user_message"]
 }

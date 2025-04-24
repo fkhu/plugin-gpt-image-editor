@@ -23,7 +23,6 @@
         "description": "Generate a new image or edit an existing image as requested by the user."
     },
     "outputType": "cards",
-    "preInstalled": true,
     "userSettings": [
         {
             "name": "openaikey",

@@ -6,7 +6,6 @@
     "title": "GPT Image Editor",
     "createdAt": "2025-04-24T00:03:25.285Z",
     "githubURL": "https://github.com/TypingMind/plugin-dall-e-3",
-    "mcpDetails": null,
     "openaiSpec": {
         "name": "gpt_image_editor",
         "parameters": {
@@ -24,8 +23,6 @@
         "description": "Generate a new image or edit an existing image as requested by the user."
     },
     "outputType": "cards",
-    "sourceUUID": null,
-    "oauthConfig": null,
     "preInstalled": true,
     "userSettings": [
         {

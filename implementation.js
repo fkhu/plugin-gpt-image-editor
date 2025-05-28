@@ -7,13 +7,15 @@ async function gpt_image_editor(params, userSettings, authorizedResources) {
 
   if (!openaikey) {
     throw new Error(
-      'No OpenAI key provided to the DALL-3 plugin. Please enter your OpenAI key in the plugin settings seperately and try again.',
+      'No OpenAI key provided to the DALL-3 plugin. Please enter your OpenAI key in the plugin settings seperately and try again.'
     );
   }
 
   let resultBase64;
 
-  const content = authorizedResources?.lastUserMessage?.content || [];
+  const content = Array.isArray(authorizedResources?.lastUserMessage?.content)
+    ? authorizedResources?.lastUserMessage?.content
+    : [];
 
   let attachedImages = content
     .filter((item) => item.type === 'tm_image_file')
@@ -58,7 +60,7 @@ async function gpt_image_editor(params, userSettings, authorizedResources) {
 
     let response = await fetch(
       'https://api.openai.com/v1/images/generations',
-      requestOptions,
+      requestOptions
     );
     if (response.status === 401) {
       throw new Error('Invalid OpenAI API Key. Please check your settings.');
@@ -83,7 +85,7 @@ async function gpt_image_editor(params, userSettings, authorizedResources) {
         const response = await fetch(url);
         const blob = await response.blob();
         return { blob, name };
-      }),
+      })
     );
 
     const formData = new FormData();

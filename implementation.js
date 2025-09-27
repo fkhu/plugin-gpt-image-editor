@@ -7,25 +7,21 @@ async function gpt_image_editor(params, userSettings, authorizedResources) {
 
   if (!openaikey) {
     throw new Error(
-      'No OpenAI key provided to the DALL-3 plugin. Please enter your OpenAI key in the plugin settings seperately and try again.'
+      'No OpenAI key provided to the DALL-3 plugin. Please enter your OpenAI key in the plugin settings separately and try again.'
     );
   }
-
+  
   let resultBase64;
 
-  const content = Array.isArray(authorizedResources?.lastUserMessage?.content)
-    ? authorizedResources?.lastUserMessage?.content
-    : [];
-
-  let attachedImages = content
-    .filter((item) => item.type === 'tm_image_file')
+  let attachedImages = (authorizedResources?.userMessage?.attachments || [])
+    .filter((item) => item.type?.startsWith('image/'))
     .map((c) => ({
-      url: c.sync?.url || c.metadata?.base64,
-      name: c.metadata?.name,
+      url: c.url,
+      name: c.name,
     }));
 
   const lastToolCallCards =
-    authorizedResources?.lastSameToolCallResponse?.cards;
+    authorizedResources?.previousRunOutput?.cards;
 
   if (!attachedImages.length && Array.isArray(lastToolCallCards)) {
     attachedImages = lastToolCallCards
